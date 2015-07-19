@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WebRTC Chat</title>
+
+  <!-- Bootstrap for general layout and styling -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+  <!-- Our WebRTC application styling -->
+  <link rel="stylesheet" type="text/css" href="style/datachannel-demo.css">
+</head>
+<body>
+
+  
+    
+  <div class="container">
+    <div class="row">
+      <header class="col-md-12">
+        <h1>WebRTC DataChannel Chat</h1>
+      </header>
+    </div>
+
+    <div class="row">
+      <section class="col-md-12">
+        
+        
+        <hr>
+
+        <h2>Getting started</h2>
+
+        <ol>
+          <li>Type a channel name and click <strong>create</strong></li>
+          <li>Open the chat in another tab</li>
+          <li>Type the same channel name and click <strong>join</strong></li>
+          <li>Wait a moment and start chatting!</li>
+        </ol>
+
+        <!-- WebRTC demo -->
+        <div class="demo">
+          <div class="demo-connect">
+            <input type="text" class="demo-chat-channel-input form-control" placeholder="Channel name"></input>
+            <button class="demo-chat-create btn btn-primary">Create</button>
+            <button class="demo-chat-join btn btn-warning">Join</button>
+          </div>
+          <div class="demo-chat inactive">
+            <div class="demo-chat-input">
+              <input name="message" class="demo-chat-message-input form-control" placeholder="Message"></input>
+              <button class="demo-chat-send btn btn-primary">Send</button>
+            </div>
+            <ul class="demo-chat-messages list-group">
+              <li class="list-group-item" data-remove="true">No chat messages available</li>
+            </ul>
+          </div>
+          
+        </div>
+        <!-- /End WebRTC demo -->
+      </section>
+    </div>
+  </div>
+  
+  <!-- Zepto for AJAX -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.1.6/zepto.min.js"></script>
+
+  <!-- Pusher for WebRTC signalling -->
+  <script src="https://js.pusher.com/2.2/pusher.min.js"></script>
+  
+  <!-- DataChannel.js for WebRTC functionality -->
+  <script src="js/DataChannel.js"></script>
+
+  <!-- Our WebRTC application -->
+  <script src="js/datachannel-demo.js"></script>
+
+  <!-- Fill channel name -->
+  <script>
+    function getParameterByName(name) {
+      name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+      var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+          results = regex.exec(location.search);
+      return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+
+    var channel = getParameterByName("channel");
+
+    if (channel) {
+      document.querySelector(".demo-chat-channel-input").value = channel;
+    }
+  </script>
+</body>
+</html>
